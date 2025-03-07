@@ -69,7 +69,7 @@ export async function generateStory(
     };
   }
 
-  if (!process.env.OPENAI_API_KEY) {
+  if (!process.env.NEXT_PUBLIC_OPENAI_API_KEY) {
     console.error("Missing OpenAI API key in environment variables");
     return {
       success: false,
@@ -220,6 +220,7 @@ export async function getAllStories() {
     };
   } catch (error) {
     console.error("Failed to load stories:", (error as Error).message);
+    return { success: false, stories: [], message: "Failed to load stories" };
   }
 }
 
