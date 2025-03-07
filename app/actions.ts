@@ -1,14 +1,9 @@
 "use server";
 
 import { generateText } from "ai";
-import OpenAI from "openai";
 import { openai as aiSdkOpenai } from "@ai-sdk/openai";
 import dbConnect from "../lib/mongodb";
 import Story from "../models/Story";
-
-const openaiClient = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 async function summarizePlot(storyText: string): Promise<string> {
   try {

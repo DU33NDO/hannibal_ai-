@@ -13,20 +13,16 @@ interface CachedConnection {
   promise: Promise<mongoose.Connection> | null;
 }
 
-declare global {
-  var mongoose:
-    | {
-        conn: mongoose.Connection | null;
-        promise: Promise<mongoose.Connection> | null;
-      }
-    | undefined;
-}
+const globalWithCache = global as typeof global & {
+  mongooseCache?: CachedConnection;
+};
 
-let cached: CachedConnection = global.mongoose || { conn: null, promise: null };
+globalWithCache.mongooseCache = globalWithCache.mongooseCache || {
+  conn: null,
+  promise: null,
+};
 
-if (!global.mongoose) {
-  global.mongoose = cached;
-}
+const cached = globalWithCache.mongooseCache;
 
 async function dbConnect(): Promise<mongoose.Connection> {
   if (cached.conn) {
@@ -34,13 +30,10 @@ async function dbConnect(): Promise<mongoose.Connection> {
   }
 
   if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose.connection;
-    });
+    const opts = { bufferCommands: false };
+    cached.promise = mongoose
+      .connect(MONGODB_URI, opts)
+      .then((mongoose) => mongoose.connection);
   }
 
   cached.conn = await cached.promise;
