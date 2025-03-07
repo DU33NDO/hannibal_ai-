@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 
-const MONGODB_API =
-  process.env.MONGODB_API ||
-  "mongodb+srv://bob1:PrqyIRhNrXBFwWjz@cluster0.jpqv0.mongodb.net/";
+const MONGODB_API = process.env.MONGODB_API || "";
 
 if (!MONGODB_API) {
   throw new Error("Please define the  environment variable inside .env");
