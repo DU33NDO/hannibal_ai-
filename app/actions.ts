@@ -206,19 +206,27 @@ Keep the story within 400 words, maintaining a refined yet chilling tone. Write 
 
 export async function getAllStories() {
   try {
-    await dbConnect();
-    const stories = await Story.find({}).sort({ story_id: -1 });
-    return { success: true, stories };
+    const stories = await Story.find();
+
+    return {
+      success: true,
+      stories: stories.map((story) => ({
+        story_id: story._id.toString(),
+        plot: story.plot,
+        book_based_story: story.book_based_story,
+        story_telling_inspiration: story.story_telling_inspiration,
+        createdAt: story.createdAt,
+      })),
+    };
   } catch (error) {
-    console.error("Error retrieving stories:", error);
-    return { success: false, stories: [] };
+    console.error("Failed to load stories:", (error as Error).message);
   }
 }
 
 export async function getStoryById(storyId: number) {
   try {
     await dbConnect();
-    const story = await Story.findOne({ story_id: storyId });
+    const story = await Story.findOne({ story_id: storyId }).lean();
 
     if (!story) {
       return { success: false, story: null, message: "Story not found" };

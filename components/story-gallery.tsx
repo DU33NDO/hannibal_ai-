@@ -24,6 +24,10 @@ export default function StoryGallery() {
     async function loadStories() {
       try {
         const result = await getAllStories();
+        if (!result) {
+          console.warn("No stories received");
+          return;
+        }
         if (result.success) {
           setStories(result.stories);
         }
