@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 39 53% 71%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 280 5% 33%;
+    --secondary-foreground: 39 53% 71%;
+    --muted: 228 5% 64%;
+    --muted-foreground: 0 0% 0%;
+    --accent: 280 5% 33%;
+    --accent-foreground: 39 53% 71%;
+    --destructive: 0 74% 25%;
+    --destructive-foreground: 39 53% 71%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 39 53% 71%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 280 5% 33%;
+    --secondary-foreground: 39 53% 71%;
+    --muted: 228 5% 64%;
+    --muted-foreground: 0 0% 0%;
+    --accent: 280 5% 33%;
+    --accent-foreground: 39 53% 71%;
+    --destructive: 0 74% 25%;
+    --destructive-foreground: 39 53% 71%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@font-face {
+  font-family: "Distressed";
+  src: url("/fonts/distressed.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.uppercase {
+  font-family: "Distressed", system-ui, sans-serif;
+  letter-spacing: 0.05em;
+}
+
