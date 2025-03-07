@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const MONGODB_API = process.env.NEXT_PUBLIC_MONGODB_API || "";
+const NEXT_PUBLIC_MONGODB_API = process.env.NEXT_PUBLIC_MONGODB_API || "";
 
-if (!MONGODB_API) {
+if (!NEXT_PUBLIC_MONGODB_API) {
   throw new Error("Please define the  environment variable inside .env");
 }
 
@@ -30,7 +30,7 @@ async function dbConnect(): Promise<mongoose.Connection> {
   if (!cached.promise) {
     const opts = { bufferCommands: false };
     cached.promise = mongoose
-      .connect(MONGODB_API, opts)
+      .connect(NEXT_PUBLIC_MONGODB_API, opts)
       .then((mongoose) => mongoose.connection);
   }
 
