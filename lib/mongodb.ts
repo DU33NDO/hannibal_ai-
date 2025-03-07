@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI || "";
+const MONGODB_API =
+  process.env.MONGODB_API ||
+  "mongodb+srv://bob1:PrqyIRhNrXBFwWjz@cluster0.jpqv0.mongodb.net/";
 
-if (!MONGODB_URI) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local"
-  );
+if (!MONGODB_API) {
+  throw new Error("Please define the  environment variable inside .env");
 }
 
 interface CachedConnection {
@@ -32,7 +32,7 @@ async function dbConnect(): Promise<mongoose.Connection> {
   if (!cached.promise) {
     const opts = { bufferCommands: false };
     cached.promise = mongoose
-      .connect(MONGODB_URI, opts)
+      .connect(MONGODB_API, opts)
       .then((mongoose) => mongoose.connection);
   }
 
